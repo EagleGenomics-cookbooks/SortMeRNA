@@ -5,14 +5,19 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+# check that Star folder exists
+describe file('/usr/local/sortmerna-2.1b') do
+  it { should be_directory }
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+# Check that Star executable is in the path
+describe command('which sortmerna') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match('sortmerna') }
+end
+
+# Check that SortMeRNA works
+describe command('sortmerna --version') do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should match('2.1') }
 end
