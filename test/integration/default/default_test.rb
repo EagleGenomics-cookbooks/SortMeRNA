@@ -5,12 +5,12 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-# check that Star folder exists
+# check that SortMeRNA folder exists
 describe file('/usr/local/sortmerna-2.1b') do
   it { should be_directory }
 end
 
-# Check that Star executable is in the path
+# Check that SortMeRNA executable is in the path
 describe command('which sortmerna') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match('sortmerna') }
